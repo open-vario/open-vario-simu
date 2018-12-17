@@ -1,0 +1,122 @@
+/*
+
+Copyright(c) 2017 Cedric Jimenez
+
+This file is part of Open-Vario Simulator.
+
+Open-Vario Simulator is free software: you can redistribute it and/or modify
+it under the terms of the GNU Lesser General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+Open-Vario Simulator is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Lesser General Public License for more details.
+
+You should have received a copy of the GNU Lesser General Public License
+along with Open-Vario Simulator.  If not, see <http://www.gnu.org/licenses/>.
+
+*/
+
+syntax = "proto3";
+
+package open_vario;
+
+
+/* Connection response message */
+message ConnectResponse
+{
+    /* Indicates if the connection has been accepted */
+    bool accept = 1;
+};
+
+/* Disconnection response message */
+message DisconnectResponse
+{};
+
+/* List sensor response message */
+message ListSensorsResponse
+{
+    /* Sensor types */
+    enum SensorType 
+    {
+        /* Unknown sensor */
+        ST_UNKNOWN = 0;
+        /* Pressure sensor */
+        ST_PRESSURE = 1;
+        /* Temperature sensor */
+        ST_TEMPERATURE = 2;
+        /* Altitude sensor */
+        ST_ALTITUDE = 4;
+        /* GNSS sensor */
+        ST_GNSS = 8;
+    };
+
+    /* Sensor value types */
+    enum SensorValueType 
+    {
+        /* Unknown */
+        SVT_UNKNOWN = 0;
+        /* Unsigned integer */
+        SVT_UINT = 1;
+        /* Signed integer */
+        SVT_INT = 2;
+        /* Single precision floating point */
+        SVT_FLOAT = 3;
+        /* Double precision floating point */
+        SVT_DOUBLE = 4;
+        /* String */
+        SVT_STRING = 5;
+        /* Boolean */
+        SVT_BOOL = 6;
+    };
+
+    /* Sensor description message */
+    message Sensor
+    {
+        /* Sensor's id */
+        uint32 id = 1;
+        /* Sensor's name */
+        string name = 2;
+        /* Sensor's type */
+        SensorType type = 3;
+        /* Sensor's value type */
+        SensorValueType value_type = 4;
+    };
+    /* List of available sensors */
+    repeated Sensor sensors = 1;
+};
+
+/* Update sensor response message */
+message UpdateSensorResponse
+{
+    /* Indicates if the sensor's value has been updated */
+    bool success = 1; 
+};
+
+/* Ping response message */
+message PingResponse
+{
+    /* Ping number */
+    uint32 number = 1;
+};
+
+/* Simulator response message */
+message SimuResponse
+{ 
+    /* Available responses */
+    oneof Responses 
+    {
+        /* Connection response */
+        ConnectResponse connect = 1;
+        /* Disconnection response */
+        DisconnectResponse disconnect = 2;
+        /* List sensors response */
+        ListSensorsResponse list_sensors = 3;
+        /* Update sensor response */
+        UpdateSensorResponse update_sensor = 4;
+        /* Ping response */
+        PingResponse ping = 5;
+    };
+};

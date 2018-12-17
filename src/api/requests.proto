@@ -1,0 +1,98 @@
+/*
+
+Copyright(c) 2017 Cedric Jimenez
+
+This file is part of Open-Vario Simulator.
+
+Open-Vario Simulator is free software: you can redistribute it and/or modify
+it under the terms of the GNU Lesser General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+Open-Vario Simulator is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Lesser General Public License for more details.
+
+You should have received a copy of the GNU Lesser General Public License
+along with Open-Vario Simulator.  If not, see <http://www.gnu.org/licenses/>.
+
+*/
+
+syntax = "proto3";
+
+package open_vario;
+
+
+/* Connection request message */
+message ConnectRequest
+{
+    /* Endpoint to send the notifications to */
+    message NotificationEndpoint
+    {
+        /* IP address */
+        string ip_address = 1;
+        /* IP port */
+        uint32 port = 2;
+    };
+
+    /* Endpoint to send the notifications to */
+    NotificationEndpoint notification_endpoint = 1;
+};
+
+/* Disconnection request message */
+message DisconnectRequest
+{};
+
+/* List sensors request message */
+message ListSensorsRequest
+{};
+
+/* Update sensor request message */
+message UpdateSensorRequest
+{
+    /* Sensor ID */
+    uint32 id = 1;
+    /* Sensor's value */
+    oneof Values
+    {
+        /* Sensor's value as unsigned integer */
+        uint32 uint_value = 2;
+        /* Sensor's value as integer */
+        sint32 int_value = 3;
+        /* Sensor's value as single precision floating point value */
+        float float_value = 4;
+        /* Sensor's value as double precision floating point value */
+        double double_value = 5;
+        /* Sensor's value as string value */
+        string string_value = 6;
+        /* Sensor's value as boolean value */
+        bool bool_value = 7;
+    };
+};
+
+/* Ping request message */
+message PingRequest
+{
+    /* Ping number */
+    uint32 number = 1;
+};
+
+/* Simulator request message */
+message SimuRequest
+{ 
+    /* Available requests */
+    oneof Requests 
+    {
+        /* Connection request */
+        ConnectRequest connect = 1;
+        /* Disconnection request */
+        DisconnectRequest disconnect = 2;
+        /* List sensors request */
+        ListSensorsRequest list_sensors = 3;
+        /* Update sensor request */
+        UpdateSensorRequest update_sensor = 4;
+        /* Ping request */
+        PingRequest ping = 5;
+    };
+};

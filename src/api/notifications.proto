@@ -1,0 +1,114 @@
+/*
+
+Copyright(c) 2017 Cedric Jimenez
+
+This file is part of Open-Vario Simulator.
+
+Open-Vario Simulator is free software: you can redistribute it and/or modify
+it under the terms of the GNU Lesser General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+Open-Vario Simulator is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Lesser General Public License for more details.
+
+You should have received a copy of the GNU Lesser General Public License
+along with Open-Vario Simulator.  If not, see <http://www.gnu.org/licenses/>.
+
+*/
+
+syntax = "proto3";
+
+package open_vario;
+
+
+/* Start notification message */
+message StartNotification
+{};
+
+/* Pressure notification message */
+message PressureNotification
+{
+    /* Pressure value (0.01 mbar) */
+    uint32 pressure = 1;
+};
+
+/* Temperature notification message */
+message TemperatureNotification
+{
+    /* Temperature value (0.1 °C) */
+    sint32 temperature = 1;
+    /* Min temperature value (0.1 °C) */
+    sint32 min_temperature = 2;
+    /* Max temperature value (0.1 °C) */
+    sint32 max_temperature = 3;
+};
+
+/* Altitude notification message */
+message AltitudeNotification
+{
+    /* Main altitude value (1 m) */
+    sint32 main_altitude = 1;
+    /* Altitude 1 value (1 m) */
+    sint32 altitude_1 = 2;
+    /* Altitude 2 value (1 m) */
+    sint32 altitude_2 = 3;
+    /* Altitude 3 value (1 m) */
+    sint32 altitude_3 = 4;
+    /* Altitude 4 value (1 m) */
+    sint32 altitude_4 = 5;
+    /* Min altitude value (1 m) */
+    sint32 min_altitude = 6;
+    /* Max altitude value (1 m) */
+    sint32 max_altitude = 7;
+};
+
+/* Vario notification message */
+message VarioNotification
+{
+    /* Vario value (0.1 m/s) */
+    sint32 vario = 1;
+    /* Min vario value (0.1 m/s) */
+    sint32 min_vario = 2;
+    /* Max vario value (0.1 m/s) */
+    sint32 max_vario = 3;
+};
+
+/* Navigation notification message */
+message NavigationNotification
+{
+    /* Speed value (0.1 m/s) */
+    sint32 speed = 1;
+    /* Latitude value (1 °) */
+    double latitude = 2;
+    /* Longitude value (1 °) */
+    double longitude = 3;
+    /* Track angle value (0.1 °) */
+    uint32 track_angle = 4;
+    /* Min speed value (0.1 m/s) */
+    sint32 min_speed = 5;
+    /* Max speed value (0.1 m/s) */
+    sint32 max_speed = 6;
+};
+
+
+/* Simulator notification message */
+message SimuNotification
+{ 
+    /* Available notifications */
+    oneof Notifications
+    {
+        /* Pressure notification */
+        PressureNotification pressure = 1;
+        /* Temperature notification */
+        TemperatureNotification temperature = 2;
+        /* Altitude notification */
+        AltitudeNotification altitude = 3;
+        /* Vario notification */
+        VarioNotification vario = 4;
+        /* Navigation notification */
+        NavigationNotification navigation = 5;
+    };
+};
