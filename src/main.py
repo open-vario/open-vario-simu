@@ -42,7 +42,7 @@ class SimuApp(SimuProtocolListener):
             Start the application
         '''
 
-        self.__protocol = SimuProtocol("127.0.0.1", 45678,45678)
+        self.__protocol = SimuProtocol("127.0.0.1", 45678, 45679)
         print "Connect..."
         self.__protocol.connect(self)
 

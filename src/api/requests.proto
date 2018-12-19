@@ -20,6 +20,7 @@ along with Open-Vario Simulator.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 syntax = "proto3";
+option optimize_for = LITE_RUNTIME;
 
 package open_vario;
 
