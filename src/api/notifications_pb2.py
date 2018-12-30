@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='open_vario',
   syntax='proto3',
   serialized_options=_b('H\003'),
-  serialized_pb=_b('\n\x13notifications.proto\x12\nopen_vario\"\x13\n\x11StartNotification\"(\n\x14PressureNotification\x12\x10\n\x08pressure\x18\x01 \x01(\r\"`\n\x17TemperatureNotification\x12\x13\n\x0btemperature\x18\x01 \x01(\x11\x12\x17\n\x0fmin_temperature\x18\x02 \x01(\x11\x12\x17\n\x0fmax_temperature\x18\x03 \x01(\x11\"\xa9\x01\n\x14\x41ltitudeNotification\x12\x15\n\rmain_altitude\x18\x01 \x01(\x11\x12\x12\n\naltitude_1\x18\x02 \x01(\x11\x12\x12\n\naltitude_2\x18\x03 \x01(\x11\x12\x12\n\naltitude_3\x18\x04 \x01(\x11\x12\x12\n\naltitude_4\x18\x05 \x01(\x11\x12\x14\n\x0cmin_altitude\x18\x06 \x01(\x11\x12\x14\n\x0cmax_altitude\x18\x07 \x01(\x11\"H\n\x11VarioNotification\x12\r\n\x05vario\x18\x01 \x01(\x11\x12\x11\n\tmin_vario\x18\x02 \x01(\x11\x12\x11\n\tmax_vario\x18\x03 \x01(\x11\"\x87\x01\n\x16NavigationNotification\x12\r\n\x05speed\x18\x01 \x01(\x11\x12\x10\n\x08latitude\x18\x02 \x01(\x01\x12\x11\n\tlongitude\x18\x03 \x01(\x01\x12\x13\n\x0btrack_angle\x18\x04 \x01(\r\x12\x11\n\tmin_speed\x18\x05 \x01(\x11\x12\x11\n\tmax_speed\x18\x06 \x01(\x11\"\xb5\x02\n\x10SimuNotification\x12\x34\n\x08pressure\x18\x01 \x01(\x0b\x32 .open_vario.PressureNotificationH\x00\x12:\n\x0btemperature\x18\x02 \x01(\x0b\x32#.open_vario.TemperatureNotificationH\x00\x12\x34\n\x08\x61ltitude\x18\x03 \x01(\x0b\x32 .open_vario.AltitudeNotificationH\x00\x12.\n\x05vario\x18\x04 \x01(\x0b\x32\x1d.open_vario.VarioNotificationH\x00\x12\x38\n\nnavigation\x18\x05 \x01(\x0b\x32\".open_vario.NavigationNotificationH\x00\x42\x0f\n\rNotificationsB\x02H\x03\x62\x06proto3')
+  serialized_pb=_b('\n\x13notifications.proto\x12\nopen_vario\"\x13\n\x11StartNotification\"T\n\x14PressureNotification\x12\x10\n\x08pressure\x18\x01 \x01(\r\x12\x14\n\x0cmin_pressure\x18\x02 \x01(\r\x12\x14\n\x0cmax_pressure\x18\x03 \x01(\r\"`\n\x17TemperatureNotification\x12\x13\n\x0btemperature\x18\x01 \x01(\x11\x12\x17\n\x0fmin_temperature\x18\x02 \x01(\x11\x12\x17\n\x0fmax_temperature\x18\x03 \x01(\x11\"\xa9\x01\n\x14\x41ltitudeNotification\x12\x15\n\rmain_altitude\x18\x01 \x01(\x11\x12\x12\n\naltitude_1\x18\x02 \x01(\x11\x12\x12\n\naltitude_2\x18\x03 \x01(\x11\x12\x12\n\naltitude_3\x18\x04 \x01(\x11\x12\x12\n\naltitude_4\x18\x05 \x01(\x11\x12\x14\n\x0cmin_altitude\x18\x06 \x01(\x11\x12\x14\n\x0cmax_altitude\x18\x07 \x01(\x11\"H\n\x11VarioNotification\x12\r\n\x05vario\x18\x01 \x01(\x11\x12\x11\n\tmin_vario\x18\x02 \x01(\x11\x12\x11\n\tmax_vario\x18\x03 \x01(\x11\"\x87\x01\n\x16NavigationNotification\x12\r\n\x05speed\x18\x01 \x01(\x11\x12\x10\n\x08latitude\x18\x02 \x01(\x01\x12\x11\n\tlongitude\x18\x03 \x01(\x01\x12\x13\n\x0btrack_angle\x18\x04 \x01(\r\x12\x11\n\tmin_speed\x18\x05 \x01(\x11\x12\x11\n\tmax_speed\x18\x06 \x01(\x11\"\xb5\x02\n\x10SimuNotification\x12\x34\n\x08pressure\x18\x01 \x01(\x0b\x32 .open_vario.PressureNotificationH\x00\x12:\n\x0btemperature\x18\x02 \x01(\x0b\x32#.open_vario.TemperatureNotificationH\x00\x12\x34\n\x08\x61ltitude\x18\x03 \x01(\x0b\x32 .open_vario.AltitudeNotificationH\x00\x12.\n\x05vario\x18\x04 \x01(\x0b\x32\x1d.open_vario.VarioNotificationH\x00\x12\x38\n\nnavigation\x18\x05 \x01(\x0b\x32\".open_vario.NavigationNotificationH\x00\x42\x0f\n\rNotificationsB\x02H\x03\x62\x06proto3')
 )
 
 
@@ -63,6 +63,20 @@ _PRESSURENOTIFICATION = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='min_pressure', full_name='open_vario.PressureNotification.min_pressure', index=1,
+      number=2, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='max_pressure', full_name='open_vario.PressureNotification.max_pressure', index=2,
+      number=3, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -76,7 +90,7 @@ _PRESSURENOTIFICATION = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=56,
-  serialized_end=96,
+  serialized_end=140,
 )
 
 
@@ -120,8 +134,8 @@ _TEMPERATURENOTIFICATION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=98,
-  serialized_end=194,
+  serialized_start=142,
+  serialized_end=238,
 )
 
 
@@ -193,8 +207,8 @@ _ALTITUDENOTIFICATION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=197,
-  serialized_end=366,
+  serialized_start=241,
+  serialized_end=410,
 )
 
 
@@ -238,8 +252,8 @@ _VARIONOTIFICATION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=368,
-  serialized_end=440,
+  serialized_start=412,
+  serialized_end=484,
 )
 
 
@@ -304,8 +318,8 @@ _NAVIGATIONNOTIFICATION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=443,
-  serialized_end=578,
+  serialized_start=487,
+  serialized_end=622,
 )
 
 
@@ -366,8 +380,8 @@ _SIMUNOTIFICATION = _descriptor.Descriptor(
       name='Notifications', full_name='open_vario.SimuNotification.Notifications',
       index=0, containing_type=None, fields=[]),
   ],
-  serialized_start=581,
-  serialized_end=890,
+  serialized_start=625,
+  serialized_end=934,
 )
 
 _SIMUNOTIFICATION.fields_by_name['pressure'].message_type = _PRESSURENOTIFICATION

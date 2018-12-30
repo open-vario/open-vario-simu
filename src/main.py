@@ -93,7 +93,9 @@ class SimuApp(SimuProtocolListener):
                 print " - " + str(sensor[0]) + " | " + sensor[1] + " | " + str(sensor[2]) + " | " + str(sensor[3])
 
             print "Update sensor"
-            self.__protocol.update_sensor(5, 53.2, SimuSensorValueType.FLOAT)
+            
+            self.__protocol.update_sensor(3, 100000, SimuSensorValueType.UINT)
+            self.__protocol.update_sensor(2, 53, SimuSensorValueType.INT)
 
         else:
 

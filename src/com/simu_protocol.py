@@ -76,6 +76,16 @@ class SimuProtocol(object):
         Simulator protocol
     '''
 
+    RESPONSE_FRAME = 'R'
+    '''
+        Response frame
+    '''
+
+    NOTIFICATION_FRAME = 'N'
+    '''
+        Notification frame
+    '''
+
     def __init__(self, target_ip, target_port, host_port):
         '''
             Constructor
@@ -310,53 +320,61 @@ class SimuProtocol(object):
                 
                 # Try decoding data
                 try:
-                    frame = SimuResponse()
-                    frame.ParseFromString(data)
+                    if data[0] == self.RESPONSE_FRAME:
+                        frame = SimuResponse()
+                    elif data[0] == self.NOTIFICATION_FRAME:
+                        frame = SimuNotification()
+                    else:
+                        pass
+
+                    frame.ParseFromString(data[1:])
                 except:
                     frame = None
 
                 # Dispatch data
                 if not (frame == None):
+                    
+                    if isinstance(frame, SimuResponse):
 
-                    # Connection response
-                    if self.__state == SimuProtocolState.CONNECTING:
-                        if (frame.HasField("connect") and
-                            frame.connect.accept):
+                        # Connection response
+                        if self.__state == SimuProtocolState.CONNECTING:
+                            if (frame.HasField("connect") and
+                                frame.connect.accept):
 
-                            # Connection success
-                            self.__state = SimuProtocolState.CONNECTED
+                                # Connection success
+                                self.__state = SimuProtocolState.CONNECTED
 
-                            # Notify user 
-                            self.__listener.on_connect(True)
-                    else:
-                        
-                        # Handle response
-                        if frame.HasField("disconnect"):
-
-                            # Close connection
-                            self.close()
-
-                            # Notify user
-                            self.__listener.on_close()
-                            end = True
-
-                        elif frame.HasField("list_sensors"):
-                            if self.__awaited_response == self.__handle_list_sensors:
-                                self.__awaited_response = None
-                                self.__handle_list_sensors(False, frame.list_sensors)
-
-                        elif frame.HasField("update_sensor"):
-                            if self.__awaited_response == self.__handle_update_sensor:
-                                self.__awaited_response = None
-                                self.__handle_update_sensor(False, frame.update_sensor)
-
-                        elif frame.HasField("ping"):
-                            if self.__awaited_response == self.__handle_ping:
-                                self.__handle_ping(False, frame.ping)
-
+                                # Notify user 
+                                self.__listener.on_connect(True)
                         else:
-                            # Ignore frame
-                            pass
+                            
+                            # Handle response
+                            if frame.HasField("disconnect"):
+
+                                # Close connection
+                                self.close()
+
+                                # Notify user
+                                self.__listener.on_close()
+                                end = True
+
+                            elif frame.HasField("list_sensors"):
+                                if self.__awaited_response == self.__handle_list_sensors:
+                                    self.__awaited_response = None
+                                    self.__handle_list_sensors(False, frame.list_sensors)
+
+                            elif frame.HasField("update_sensor"):
+                                if self.__awaited_response == self.__handle_update_sensor:
+                                    self.__awaited_response = None
+                                    self.__handle_update_sensor(False, frame.update_sensor)
+
+                            elif frame.HasField("ping"):
+                                if self.__awaited_response == self.__handle_ping:
+                                    self.__handle_ping(False, frame.ping)
+
+                            else:
+                                # Ignore frame
+                                pass
 
             else:
 

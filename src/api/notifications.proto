@@ -34,6 +34,10 @@ message PressureNotification
 {
     /* Pressure value (0.01 mbar) */
     uint32 pressure = 1;
+    /* Min pressure value (0.01 mbar) */
+    uint32 min_pressure = 2;
+    /* Max pressure value (0.01 mbar) */
+    uint32 max_pressure = 3;
 };
 
 /* Temperature notification message */
