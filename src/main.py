@@ -36,7 +36,7 @@ from com.simu_protocol import SimuProtocol, SimuProtocolListener, SimuSensorValu
 
 
 class SimuApp(SimuProtocolListener):
-    
+
     def start(self):
         '''
             Start the application
@@ -46,8 +46,31 @@ class SimuApp(SimuProtocolListener):
         print "Connect..."
         self.__protocol.connect(self)
 
+        temp_sensor_value = -200
+        temp_sensor_step = 25
+
+        baro_sensor_value = 100000
+        baro_sensor_step = 50
+
+        switch_sensor = True
+        self.__update_sensors = False
         while True:
-            time.sleep(1)
+            time.sleep(0.25)
+            if self.__update_sensors == True:
+                self.__update_sensors = False
+
+                if switch_sensor:
+                    self.__protocol.update_sensor(3, baro_sensor_value, SimuSensorValueType.UINT)
+                    baro_sensor_value += baro_sensor_step
+                    if ((baro_sensor_value <= 90000) or (baro_sensor_value >= 102000)):
+                        baro_sensor_step = -1 * baro_sensor_step
+                else:
+                    self.__protocol.update_sensor(2, temp_sensor_value, SimuSensorValueType.INT)
+                    temp_sensor_value += temp_sensor_step
+                    if ((temp_sensor_value < -400) or (temp_sensor_value >= 500)):
+                        temp_sensor_step = -1 * temp_sensor_step
+
+                switch_sensor = not switch_sensor
 
         return
 
@@ -92,10 +115,9 @@ class SimuApp(SimuProtocolListener):
             for sensor in sensors:
                 print " - " + str(sensor[0]) + " | " + sensor[1] + " | " + str(sensor[2]) + " | " + str(sensor[3])
 
-            print "Update sensor"
+            print "Update sensors"
             
-            self.__protocol.update_sensor(3, 100000, SimuSensorValueType.UINT)
-            self.__protocol.update_sensor(2, 53, SimuSensorValueType.INT)
+            self.__update_sensors = True
 
         else:
 
@@ -114,13 +136,27 @@ class SimuApp(SimuProtocolListener):
 
         if not (success == None):
 
-            if success:
-                print "Success!"
-            else:
+            if not success:
                 print "Denied!"
 
         else:
             print "Failed!"
+
+        self.__update_sensors = True
+
+        return
+
+    def on_value(self, notif_type, notif_values):
+        '''
+            Called when a value has been received
+
+            @param notif_type: Indicates the type of the received values
+            @type notif_type: string
+            @param notif_values: Received values
+            @type notif_values: {string:value}
+        '''
+
+        print "[" + notif_type + "] : " + str(notif_values)
 
         return
 

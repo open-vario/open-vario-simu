@@ -338,14 +338,21 @@ class SimuProtocol(object):
 
                         # Connection response
                         if self.__state == SimuProtocolState.CONNECTING:
-                            if (frame.HasField("connect") and
-                                frame.connect.accept):
+                            if frame.HasField("connect"):
+                                
+                                if frame.connect.accept:
 
-                                # Connection success
-                                self.__state = SimuProtocolState.CONNECTED
+                                    # Connection success
+                                    self.__state = SimuProtocolState.CONNECTED
+
+                                else:
+
+                                    # Connection failed
+                                    self.close()
+                                    end = True
 
                                 # Notify user 
-                                self.__listener.on_connect(True)
+                                self.__listener.on_connect(frame.connect.accept)
                         else:
                             
                             # Handle response
@@ -375,6 +382,53 @@ class SimuProtocol(object):
                             else:
                                 # Ignore frame
                                 pass
+
+                    else:
+
+                        # Notification
+
+                        notif_type = ""
+                        notif_values = {}
+                        if frame.HasField("pressure"):
+                            notif_type = "pressure"
+                            notif_values["pressure"] = frame.pressure.pressure
+                            notif_values["min_pressure"] = frame.pressure.min_pressure
+                            notif_values["max_pressure"] = frame.pressure.max_pressure
+                        
+                        elif frame.HasField("temperature"):
+                            notif_type = "temperature"
+                            notif_values["temperature"] = frame.temperature.temperature
+                            notif_values["min_temperature"] = frame.temperature.min_temperature
+                            notif_values["max_temperature"] = frame.temperature.max_temperature
+
+                        elif frame.HasField("altitude"):
+                            notif_type = "altitude"
+                            notif_values["altitude"] = frame.altitude.main_altitude
+                            notif_values["min_altitude"] = frame.altitude.min_altitude
+                            notif_values["max_altitude"] = frame.altitude.max_altitude
+                            notif_values["altitude_1"] = frame.altitude.altitude_1
+                            notif_values["altitude_2"] = frame.altitude.altitude_2
+                            notif_values["altitude_3"] = frame.altitude.altitude_3
+                            notif_values["altitude_4"] = frame.altitude.altitude_4
+
+                        elif frame.HasField("vario"):
+                            notif_type = "vario"
+                            notif_values["vario"] = frame.vario.vario
+                            notif_values["min_vario"] = frame.vario.min_vario
+                            notif_values["max_vario"] = frame.vario.max_vario
+
+                        elif frame.HasField("navigation"):
+                            notif_type = "navigation"
+                            notif_values["speed"] = frame.navigation.speed
+                            notif_values["min_speed"] = frame.navigation.min_speed
+                            notif_values["max_speed"] = frame.navigation.max_speed
+                            notif_values["latitude"] = frame.navigation.latitude
+                            notif_values["longitude"] = frame.navigation.longitude
+                            notif_values["track_angle"] = frame.navigation.track_angle
+
+                        # Notify user
+                        if not (notif_type == ""):
+                            self.__listener.on_value(notif_type, notif_values)
 
             else:
 
@@ -537,5 +591,16 @@ class SimuProtocolListener(object):
 
             @param success: Indicates if the sensor update has succeed, None if no response received
             @type success: bool
+        '''
+        return
+
+    def on_value(self, notif_type, notif_values):
+        '''
+            Called when a value has been received
+
+            @param notif_type: Indicates the type of the received values
+            @type notif_type: string
+            @param notif_values: Received values
+            @type notif_values: {string:value}
         '''
         return
