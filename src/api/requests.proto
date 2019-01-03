@@ -65,9 +65,9 @@ message UpdateSensorRequest
         float float_value = 4;
         /* Sensor's value as double precision floating point value */
         double double_value = 5;
-        /* Sensor's value as string value */
+        /* Sensor's value as string */
         string string_value = 6;
-        /* Sensor's value as boolean value */
+        /* Sensor's value as boolean */
         bool bool_value = 7;
     };
 };
@@ -77,6 +77,40 @@ message PingRequest
 {
     /* Ping number */
     uint32 number = 1;
+};
+
+/* Configuration value write request message */
+message ConfigValueWriteRequest
+{
+    /* Group ID */
+    uint32 group_id = 1;
+    /* Value ID */
+    uint32 value_id = 2;
+    /* Configuration value */
+    oneof Values
+    {
+        /* Value as unsigned integer */
+        uint32 uint_value = 3;
+        /* Value as integer */
+        sint32 int_value = 4;
+        /* Value as single precision floating point value */
+        float float_value = 5;
+        /* Value as double precision floating point value */
+        double double_value = 6;
+        /* Value as string */
+        string string_value = 7;
+        /* Value as boolean */
+        bool bool_value = 8;
+    };
+};
+
+/* Configuration value read request message */
+message ConfigValueReadRequest
+{
+    /* Group ID */
+    uint32 group_id = 1;
+    /* Value ID */
+    uint32 value_id = 2;
 };
 
 /* Simulator request message */
@@ -95,5 +129,9 @@ message SimuRequest
         UpdateSensorRequest update_sensor = 4;
         /* Ping request */
         PingRequest ping = 5;
+        /* Configuration value write request */
+        ConfigValueWriteRequest config_write = 6;
+        /* Configuration value read request */
+        ConfigValueReadRequest config_read = 7;
     };
 };

@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='open_vario',
   syntax='proto3',
   serialized_options=_b('H\003'),
-  serialized_pb=_b('\n\x0erequests.proto\x12\nopen_vario\"\x9a\x01\n\x0e\x43onnectRequest\x12N\n\x15notification_endpoint\x18\x01 \x01(\x0b\x32/.open_vario.ConnectRequest.NotificationEndpoint\x1a\x38\n\x14NotificationEndpoint\x12\x12\n\nip_address\x18\x01 \x01(\t\x12\x0c\n\x04port\x18\x02 \x01(\r\"\x13\n\x11\x44isconnectRequest\"\x14\n\x12ListSensorsRequest\"\xb3\x01\n\x13UpdateSensorRequest\x12\n\n\x02id\x18\x01 \x01(\r\x12\x14\n\nuint_value\x18\x02 \x01(\rH\x00\x12\x13\n\tint_value\x18\x03 \x01(\x11H\x00\x12\x15\n\x0b\x66loat_value\x18\x04 \x01(\x02H\x00\x12\x16\n\x0c\x64ouble_value\x18\x05 \x01(\x01H\x00\x12\x16\n\x0cstring_value\x18\x06 \x01(\tH\x00\x12\x14\n\nbool_value\x18\x07 \x01(\x08H\x00\x42\x08\n\x06Values\"\x1d\n\x0bPingRequest\x12\x0e\n\x06number\x18\x01 \x01(\r\"\x98\x02\n\x0bSimuRequest\x12-\n\x07\x63onnect\x18\x01 \x01(\x0b\x32\x1a.open_vario.ConnectRequestH\x00\x12\x33\n\ndisconnect\x18\x02 \x01(\x0b\x32\x1d.open_vario.DisconnectRequestH\x00\x12\x36\n\x0clist_sensors\x18\x03 \x01(\x0b\x32\x1e.open_vario.ListSensorsRequestH\x00\x12\x38\n\rupdate_sensor\x18\x04 \x01(\x0b\x32\x1f.open_vario.UpdateSensorRequestH\x00\x12\'\n\x04ping\x18\x05 \x01(\x0b\x32\x17.open_vario.PingRequestH\x00\x42\n\n\x08RequestsB\x02H\x03\x62\x06proto3')
+  serialized_pb=_b('\n\x0erequests.proto\x12\nopen_vario\"\x9a\x01\n\x0e\x43onnectRequest\x12N\n\x15notification_endpoint\x18\x01 \x01(\x0b\x32/.open_vario.ConnectRequest.NotificationEndpoint\x1a\x38\n\x14NotificationEndpoint\x12\x12\n\nip_address\x18\x01 \x01(\t\x12\x0c\n\x04port\x18\x02 \x01(\r\"\x13\n\x11\x44isconnectRequest\"\x14\n\x12ListSensorsRequest\"\xb3\x01\n\x13UpdateSensorRequest\x12\n\n\x02id\x18\x01 \x01(\r\x12\x14\n\nuint_value\x18\x02 \x01(\rH\x00\x12\x13\n\tint_value\x18\x03 \x01(\x11H\x00\x12\x15\n\x0b\x66loat_value\x18\x04 \x01(\x02H\x00\x12\x16\n\x0c\x64ouble_value\x18\x05 \x01(\x01H\x00\x12\x16\n\x0cstring_value\x18\x06 \x01(\tH\x00\x12\x14\n\nbool_value\x18\x07 \x01(\x08H\x00\x42\x08\n\x06Values\"\x1d\n\x0bPingRequest\x12\x0e\n\x06number\x18\x01 \x01(\r\"\xcf\x01\n\x17\x43onfigValueWriteRequest\x12\x10\n\x08group_id\x18\x01 \x01(\r\x12\x10\n\x08value_id\x18\x02 \x01(\r\x12\x14\n\nuint_value\x18\x03 \x01(\rH\x00\x12\x13\n\tint_value\x18\x04 \x01(\x11H\x00\x12\x15\n\x0b\x66loat_value\x18\x05 \x01(\x02H\x00\x12\x16\n\x0c\x64ouble_value\x18\x06 \x01(\x01H\x00\x12\x16\n\x0cstring_value\x18\x07 \x01(\tH\x00\x12\x14\n\nbool_value\x18\x08 \x01(\x08H\x00\x42\x08\n\x06Values\"<\n\x16\x43onfigValueReadRequest\x12\x10\n\x08group_id\x18\x01 \x01(\r\x12\x10\n\x08value_id\x18\x02 \x01(\r\"\x90\x03\n\x0bSimuRequest\x12-\n\x07\x63onnect\x18\x01 \x01(\x0b\x32\x1a.open_vario.ConnectRequestH\x00\x12\x33\n\ndisconnect\x18\x02 \x01(\x0b\x32\x1d.open_vario.DisconnectRequestH\x00\x12\x36\n\x0clist_sensors\x18\x03 \x01(\x0b\x32\x1e.open_vario.ListSensorsRequestH\x00\x12\x38\n\rupdate_sensor\x18\x04 \x01(\x0b\x32\x1f.open_vario.UpdateSensorRequestH\x00\x12\'\n\x04ping\x18\x05 \x01(\x0b\x32\x17.open_vario.PingRequestH\x00\x12;\n\x0c\x63onfig_write\x18\x06 \x01(\x0b\x32#.open_vario.ConfigValueWriteRequestH\x00\x12\x39\n\x0b\x63onfig_read\x18\x07 \x01(\x0b\x32\".open_vario.ConfigValueReadRequestH\x00\x42\n\n\x08RequestsB\x02H\x03\x62\x06proto3')
 )
 
 
@@ -248,6 +248,127 @@ _PINGREQUEST = _descriptor.Descriptor(
 )
 
 
+_CONFIGVALUEWRITEREQUEST = _descriptor.Descriptor(
+  name='ConfigValueWriteRequest',
+  full_name='open_vario.ConfigValueWriteRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='group_id', full_name='open_vario.ConfigValueWriteRequest.group_id', index=0,
+      number=1, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='value_id', full_name='open_vario.ConfigValueWriteRequest.value_id', index=1,
+      number=2, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='uint_value', full_name='open_vario.ConfigValueWriteRequest.uint_value', index=2,
+      number=3, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='int_value', full_name='open_vario.ConfigValueWriteRequest.int_value', index=3,
+      number=4, type=17, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='float_value', full_name='open_vario.ConfigValueWriteRequest.float_value', index=4,
+      number=5, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='double_value', full_name='open_vario.ConfigValueWriteRequest.double_value', index=5,
+      number=6, type=1, cpp_type=5, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='string_value', full_name='open_vario.ConfigValueWriteRequest.string_value', index=6,
+      number=7, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='bool_value', full_name='open_vario.ConfigValueWriteRequest.bool_value', index=7,
+      number=8, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+    _descriptor.OneofDescriptor(
+      name='Values', full_name='open_vario.ConfigValueWriteRequest.Values',
+      index=0, containing_type=None, fields=[]),
+  ],
+  serialized_start=444,
+  serialized_end=651,
+)
+
+
+_CONFIGVALUEREADREQUEST = _descriptor.Descriptor(
+  name='ConfigValueReadRequest',
+  full_name='open_vario.ConfigValueReadRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='group_id', full_name='open_vario.ConfigValueReadRequest.group_id', index=0,
+      number=1, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='value_id', full_name='open_vario.ConfigValueReadRequest.value_id', index=1,
+      number=2, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=653,
+  serialized_end=713,
+)
+
+
 _SIMUREQUEST = _descriptor.Descriptor(
   name='SimuRequest',
   full_name='open_vario.SimuRequest',
@@ -290,6 +411,20 @@ _SIMUREQUEST = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='config_write', full_name='open_vario.SimuRequest.config_write', index=5,
+      number=6, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='config_read', full_name='open_vario.SimuRequest.config_read', index=6,
+      number=7, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -305,8 +440,8 @@ _SIMUREQUEST = _descriptor.Descriptor(
       name='Requests', full_name='open_vario.SimuRequest.Requests',
       index=0, containing_type=None, fields=[]),
   ],
-  serialized_start=444,
-  serialized_end=724,
+  serialized_start=716,
+  serialized_end=1116,
 )
 
 _CONNECTREQUEST_NOTIFICATIONENDPOINT.containing_type = _CONNECTREQUEST
@@ -329,11 +464,31 @@ _UPDATESENSORREQUEST.fields_by_name['string_value'].containing_oneof = _UPDATESE
 _UPDATESENSORREQUEST.oneofs_by_name['Values'].fields.append(
   _UPDATESENSORREQUEST.fields_by_name['bool_value'])
 _UPDATESENSORREQUEST.fields_by_name['bool_value'].containing_oneof = _UPDATESENSORREQUEST.oneofs_by_name['Values']
+_CONFIGVALUEWRITEREQUEST.oneofs_by_name['Values'].fields.append(
+  _CONFIGVALUEWRITEREQUEST.fields_by_name['uint_value'])
+_CONFIGVALUEWRITEREQUEST.fields_by_name['uint_value'].containing_oneof = _CONFIGVALUEWRITEREQUEST.oneofs_by_name['Values']
+_CONFIGVALUEWRITEREQUEST.oneofs_by_name['Values'].fields.append(
+  _CONFIGVALUEWRITEREQUEST.fields_by_name['int_value'])
+_CONFIGVALUEWRITEREQUEST.fields_by_name['int_value'].containing_oneof = _CONFIGVALUEWRITEREQUEST.oneofs_by_name['Values']
+_CONFIGVALUEWRITEREQUEST.oneofs_by_name['Values'].fields.append(
+  _CONFIGVALUEWRITEREQUEST.fields_by_name['float_value'])
+_CONFIGVALUEWRITEREQUEST.fields_by_name['float_value'].containing_oneof = _CONFIGVALUEWRITEREQUEST.oneofs_by_name['Values']
+_CONFIGVALUEWRITEREQUEST.oneofs_by_name['Values'].fields.append(
+  _CONFIGVALUEWRITEREQUEST.fields_by_name['double_value'])
+_CONFIGVALUEWRITEREQUEST.fields_by_name['double_value'].containing_oneof = _CONFIGVALUEWRITEREQUEST.oneofs_by_name['Values']
+_CONFIGVALUEWRITEREQUEST.oneofs_by_name['Values'].fields.append(
+  _CONFIGVALUEWRITEREQUEST.fields_by_name['string_value'])
+_CONFIGVALUEWRITEREQUEST.fields_by_name['string_value'].containing_oneof = _CONFIGVALUEWRITEREQUEST.oneofs_by_name['Values']
+_CONFIGVALUEWRITEREQUEST.oneofs_by_name['Values'].fields.append(
+  _CONFIGVALUEWRITEREQUEST.fields_by_name['bool_value'])
+_CONFIGVALUEWRITEREQUEST.fields_by_name['bool_value'].containing_oneof = _CONFIGVALUEWRITEREQUEST.oneofs_by_name['Values']
 _SIMUREQUEST.fields_by_name['connect'].message_type = _CONNECTREQUEST
 _SIMUREQUEST.fields_by_name['disconnect'].message_type = _DISCONNECTREQUEST
 _SIMUREQUEST.fields_by_name['list_sensors'].message_type = _LISTSENSORSREQUEST
 _SIMUREQUEST.fields_by_name['update_sensor'].message_type = _UPDATESENSORREQUEST
 _SIMUREQUEST.fields_by_name['ping'].message_type = _PINGREQUEST
+_SIMUREQUEST.fields_by_name['config_write'].message_type = _CONFIGVALUEWRITEREQUEST
+_SIMUREQUEST.fields_by_name['config_read'].message_type = _CONFIGVALUEREADREQUEST
 _SIMUREQUEST.oneofs_by_name['Requests'].fields.append(
   _SIMUREQUEST.fields_by_name['connect'])
 _SIMUREQUEST.fields_by_name['connect'].containing_oneof = _SIMUREQUEST.oneofs_by_name['Requests']
@@ -349,11 +504,19 @@ _SIMUREQUEST.fields_by_name['update_sensor'].containing_oneof = _SIMUREQUEST.one
 _SIMUREQUEST.oneofs_by_name['Requests'].fields.append(
   _SIMUREQUEST.fields_by_name['ping'])
 _SIMUREQUEST.fields_by_name['ping'].containing_oneof = _SIMUREQUEST.oneofs_by_name['Requests']
+_SIMUREQUEST.oneofs_by_name['Requests'].fields.append(
+  _SIMUREQUEST.fields_by_name['config_write'])
+_SIMUREQUEST.fields_by_name['config_write'].containing_oneof = _SIMUREQUEST.oneofs_by_name['Requests']
+_SIMUREQUEST.oneofs_by_name['Requests'].fields.append(
+  _SIMUREQUEST.fields_by_name['config_read'])
+_SIMUREQUEST.fields_by_name['config_read'].containing_oneof = _SIMUREQUEST.oneofs_by_name['Requests']
 DESCRIPTOR.message_types_by_name['ConnectRequest'] = _CONNECTREQUEST
 DESCRIPTOR.message_types_by_name['DisconnectRequest'] = _DISCONNECTREQUEST
 DESCRIPTOR.message_types_by_name['ListSensorsRequest'] = _LISTSENSORSREQUEST
 DESCRIPTOR.message_types_by_name['UpdateSensorRequest'] = _UPDATESENSORREQUEST
 DESCRIPTOR.message_types_by_name['PingRequest'] = _PINGREQUEST
+DESCRIPTOR.message_types_by_name['ConfigValueWriteRequest'] = _CONFIGVALUEWRITEREQUEST
+DESCRIPTOR.message_types_by_name['ConfigValueReadRequest'] = _CONFIGVALUEREADREQUEST
 DESCRIPTOR.message_types_by_name['SimuRequest'] = _SIMUREQUEST
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
@@ -399,6 +562,20 @@ PingRequest = _reflection.GeneratedProtocolMessageType('PingRequest', (_message.
   # @@protoc_insertion_point(class_scope:open_vario.PingRequest)
   ))
 _sym_db.RegisterMessage(PingRequest)
+
+ConfigValueWriteRequest = _reflection.GeneratedProtocolMessageType('ConfigValueWriteRequest', (_message.Message,), dict(
+  DESCRIPTOR = _CONFIGVALUEWRITEREQUEST,
+  __module__ = 'requests_pb2'
+  # @@protoc_insertion_point(class_scope:open_vario.ConfigValueWriteRequest)
+  ))
+_sym_db.RegisterMessage(ConfigValueWriteRequest)
+
+ConfigValueReadRequest = _reflection.GeneratedProtocolMessageType('ConfigValueReadRequest', (_message.Message,), dict(
+  DESCRIPTOR = _CONFIGVALUEREADREQUEST,
+  __module__ = 'requests_pb2'
+  # @@protoc_insertion_point(class_scope:open_vario.ConfigValueReadRequest)
+  ))
+_sym_db.RegisterMessage(ConfigValueReadRequest)
 
 SimuRequest = _reflection.GeneratedProtocolMessageType('SimuRequest', (_message.Message,), dict(
   DESCRIPTOR = _SIMUREQUEST,

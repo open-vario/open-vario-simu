@@ -103,6 +103,80 @@ message PingResponse
     uint32 number = 1;
 };
 
+/* Configuration value write response message */
+message ConfigValueWriteResponse
+{
+    /* Indicates if the configuration value has been written */
+    bool success = 1;
+};
+
+/* Configuration value read response message */
+message ConfigValueReadResponse
+{
+    /* Indicates if the configuration value has been read */
+    bool success = 1;
+    /* Value group name */
+    string value_group_name = 2;
+    /* Value name */
+    string value_name = 3;
+    /* Value type */
+    string value_type = 4;
+    /* Value size */
+    uint32 value_size = 5;
+    /* Indicate if the value has min and max values */
+    bool has_min_max = 6;
+    /* Indicate if the value will be taken into account at reset only */
+    bool is_reset_only = 7;
+    /* Configuration value */
+    oneof Values
+    {
+        /* Value as unsigned integer */
+        uint32 uint_value = 10;
+        /* Value as integer */
+        sint32 int_value = 11;
+        /* Value as single precision floating point value */
+        float float_value = 12;
+        /* Value as double precision floating point value */
+        double double_value = 13;
+        /* Value as string */
+        string string_value = 14;
+        /* Value as boolean */
+        bool bool_value = 15;
+    };
+    /* Configuration min value */
+    oneof MinValues
+    {
+        /* Value as unsigned integer */
+        uint32 uint_min_value = 20;
+        /* Value as integer */
+        sint32 int_min_value = 21;
+        /* Value as single precision floating point value */
+        float float_min_value = 22;
+        /* Value as double precision floating point value */
+        double double_min_value = 23;
+        /* Value as string */
+        string string_min_value = 24;
+        /* Value as boolean */
+        bool bool_min_value = 25;
+    };
+    /* Configuration max value */
+    oneof MaxValues
+    {
+        /* Value as unsigned integer */
+        uint32 uint_max_value = 30;
+        /* Value as integer */
+        sint32 int_max_value = 31;
+        /* Value as single precision floating point value */
+        float float_max_value = 32;
+        /* Value as double precision floating point value */
+        double double_max_value = 33;
+        /* Value as string */
+        string string_max_value = 34;
+        /* Value as boolean */
+        bool bool_max_value = 35;
+    };
+};
+
 /* Simulator response message */
 message SimuResponse
 { 
@@ -119,5 +193,9 @@ message SimuResponse
         UpdateSensorResponse update_sensor = 4;
         /* Ping response */
         PingResponse ping = 5;
+        /* Configuration value write response */
+        ConfigValueWriteResponse config_write = 6;
+        /* Configuration value read response */
+        ConfigValueReadResponse config_read = 7;
     };
 };
