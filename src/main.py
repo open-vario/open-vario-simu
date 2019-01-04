@@ -26,6 +26,7 @@ along with Open-Vario Simulator.  If not, see <http://www.gnu.org/licenses/>.
 #### Imports
 import time
 from com.simu_protocol import SimuProtocol, SimuProtocolListener, SimuSensorValueType
+from com.simu_sync_protocol import SimuSyncProtocol, SimuSyncProtocolListener 
 
 ####################################################
 #### Data types
@@ -43,106 +44,58 @@ class SimuApp(SimuProtocolListener):
         '''
 
         self.__protocol = SimuProtocol("127.0.0.1", 45678, 45679)
-        print "Connect..."
-        self.__protocol.connect(self)
+        self.__sync_protocol = SimuSyncProtocol(self.__protocol)
 
-        temp_sensor_value = -200
-        temp_sensor_step = 25
+        while not self.__sync_protocol.is_connected():
 
-        baro_sensor_value = 100000
-        baro_sensor_step = 50
+            print "Connect..."
+            while not self.__sync_protocol.connect(self):
+                print "Failed! Retry..."
 
-        switch_sensor = True
-        self.__update_sensors = False
-        while True:
-            time.sleep(0.25)
-            if self.__update_sensors == True:
-                self.__update_sensors = False
+            print "Get sensor list..."
+            sensors = None
+            while (self.__sync_protocol.is_connected() and (sensors == None)):
+                sensors = self.__sync_protocol.get_sensors_list()
 
-                if switch_sensor:
-                    self.__protocol.update_sensor(3, baro_sensor_value, SimuSensorValueType.UINT)
+            if self.__sync_protocol.is_connected():
+                print "Sensor list :"
+                for sensor in sensors:
+                    print " - " + str(sensor[0]) + " | " + sensor[1] + " | " + str(sensor[2]) + " | " + str(sensor[3])
+
+                print "Update sensors"
+
+                temp_sensor_value = -200
+                temp_sensor_step = 25
+
+                baro_sensor_value = 100000
+                baro_sensor_step = 50
+
+                while self.__sync_protocol.is_connected():
+                    time.sleep(0.25)
+                    
+                    ret = self.__sync_protocol.update_sensor(3, baro_sensor_value, SimuSensorValueType.UINT)
+                    if not (ret == None):
+                        if not ret:
+                            print "Update failed"
+                    else:
+                        print "No response"
+                        self.__sync_protocol.close()
+
                     baro_sensor_value += baro_sensor_step
                     if ((baro_sensor_value <= 90000) or (baro_sensor_value >= 102000)):
                         baro_sensor_step = -1 * baro_sensor_step
-                else:
-                    self.__protocol.update_sensor(2, temp_sensor_value, SimuSensorValueType.INT)
+
+                    ret = self.__sync_protocol.update_sensor(2, temp_sensor_value, SimuSensorValueType.INT)
+                    if not (ret == None):
+                        if not ret:
+                            print "Update failed"
+                    else:
+                        print "No response"
+                        self.__sync_protocol.close()
+                        
                     temp_sensor_value += temp_sensor_step
                     if ((temp_sensor_value < -400) or (temp_sensor_value >= 500)):
                         temp_sensor_step = -1 * temp_sensor_step
-
-                switch_sensor = not switch_sensor
-
-        return
-
-    def on_connect(self, success):
-        '''
-            Called at the end of the connection process
-
-            @param success: Indicates if the connection process has succeed
-            @type success: bool
-        '''
-
-        if success:
-            print "Success!"
-            print "Get sensor list..."
-            self.__protocol.get_sensors_list()
-        else:
-            print "Failed! Retry..."
-            self.__protocol.connect(self)
-
-        return
-
-    def on_close(self):
-        '''
-            Called when the connection has been closed
-        '''
-
-        print "Connection closed!"
-
-        return
-
-    def on_sensors_list(self, sensors):
-        '''
-            Called at the end of the sensors list exchange
-
-            @param sensors: List of sensors on success, None if no response received
-            @type sensors: [ (int, string, SimuSensorType, SimuSensorValueType) ]
-        '''
-
-        if not (sensors == None):
-
-            print "Sensor list :"
-            for sensor in sensors:
-                print " - " + str(sensor[0]) + " | " + sensor[1] + " | " + str(sensor[2]) + " | " + str(sensor[3])
-
-            print "Update sensors"
-            
-            self.__update_sensors = True
-
-        else:
-
-            print "Failed! Retry...."
-            self.__protocol.get_sensors_list()
-
-        return
-
-    def on_update_sensor(self, success):
-        '''
-            Called at the end of the sensor update exchange
-
-            @param success: Indicates if the sensor update has succeed, None if no response received
-            @type success: bool
-        '''
-
-        if not (success == None):
-
-            if not success:
-                print "Denied!"
-
-        else:
-            print "Failed!"
-
-        self.__update_sensors = True
 
         return
 
